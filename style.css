@@ -1,0 +1,189 @@
+:root {
+  --bg: #1a0303;
+  --bg-2: #5a0a02;
+  --quente: #ff3b12;
+  --sol: #ffb000;
+  --texto: #fff4e8;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  background: radial-gradient(circle at 50% 35%, var(--bg-2) 0%, var(--bg) 70%);
+  background-color: var(--bg);
+  color: var(--texto);
+  font-family: "Rubik Mono One", Impact, "Arial Black", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(4.5rem, 22vw, 14rem);
+  line-height: .85;
+  letter-spacing: -.03em;
+  color: var(--sol);
+  -webkit-text-stroke: 3px #000;
+  text-shadow: 6px 6px 0 var(--quente), 12px 12px 0 #000;
+  animation: treme .12s linear 8;
+}
+
+/* Figurinhas */
+.stickers {
+  display: flex;
+  gap: clamp(1rem, 5vw, 3rem);
+  margin-top: clamp(1.5rem, 5vw, 3rem);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sticker {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform .1s;
+}
+
+.sticker img {
+  display: block;
+  width: min(42vw, 260px);
+  height: auto;
+  border: 6px solid #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 0 #000;
+}
+
+.sticker:first-child { transform: rotate(-7deg); }
+.sticker:last-child { transform: rotate(6deg); }
+.sticker:last-child img { width: min(34vw, 210px); }
+
+.sticker:active { transform: scale(.92) rotate(0deg); }
+
+/* Frase */
+.frase {
+  margin: 2rem 0 0;
+  min-height: 1.5em;
+  font-size: clamp(1.1rem, 4.5vw, 1.8rem);
+  color: var(--texto);
+  text-shadow: 3px 3px 0 #000;
+}
+
+.frase.nova { animation: pulo .3s ease-out; }
+
+/* Contador */
+.contador {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+}
+
+.contador span {
+  font-size: .8rem;
+  opacity: .75;
+}
+
+.contador strong {
+  font-size: clamp(2.5rem, 12vw, 4.5rem);
+  color: var(--quente);
+  -webkit-text-stroke: 2px #000;
+  text-shadow: 4px 4px 0 #000;
+}
+
+.contador strong.subiu { animation: pulo .2s ease-out; }
+
+/* Botões */
+.botoes {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.botoes button {
+  font: inherit;
+  font-size: .85rem;
+  padding: .85rem 1.2rem;
+  border: 3px solid #000;
+  border-radius: 10px;
+  background: var(--sol);
+  color: #000;
+  box-shadow: 0 5px 0 #000;
+  cursor: pointer;
+}
+
+.botoes button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #000;
+}
+
+.botoes button.secundario {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--texto);
+  box-shadow: none;
+}
+
+button:focus-visible {
+  outline: 4px solid var(--texto);
+  outline-offset: 4px;
+}
+
+/* Chuva de emojis */
+#chuva {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.gota {
+  position: absolute;
+  top: -3rem;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  animation: cair linear forwards;
+}
+
+/* Tremida da tela */
+body.tremendo main { animation: treme .1s linear 5; }
+
+@keyframes treme {
+  0%   { transform: translate(0, 0) rotate(0); }
+  25%  { transform: translate(-6px, 3px) rotate(-1.5deg); }
+  50%  { transform: translate(5px, -4px) rotate(1.5deg); }
+  75%  { transform: translate(-3px, -2px) rotate(-1deg); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes pulo {
+  0%   { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cair {
+  to { transform: translateY(calc(100vh + 6rem)) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1, body.tremendo main, .frase.nova, .contador strong.subiu { animation: none; }
+}
