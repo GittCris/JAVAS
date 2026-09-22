@@ -76,6 +76,37 @@ h1 {
 
 .sticker:active { transform: scale(.92) rotate(0deg); }
 
+/* Foto do meio */
+.foto {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.foto figcaption {
+  font-size: clamp(1.1rem, 4.5vw, 1.9rem);
+  color: var(--sol);
+  -webkit-text-stroke: 1px #000;
+  text-shadow: 3px 3px 0 var(--quente), 6px 6px 0 #000;
+  font-family: "Rubik Mono One", Impact, "Arial Black", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.foto img {
+  display: block;
+  width: min(80vw, 340px);
+  height: auto;
+  border: 8px solid #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 0 #000;
+}
+
+/* No celular a foto vem primeiro, com as figurinhas lado a lado embaixo */
+@media (max-width: 700px) {
+  .foto { order: -1; width: 100%; }
+}
+
 /* Frase */
 .frase {
   margin: 2rem 0 0;
